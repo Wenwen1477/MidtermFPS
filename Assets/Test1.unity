@@ -280,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 667095699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.043, y: 2.6231, z: 0.272}
+  m_LocalPosition: {x: 0.043, y: 2.29, z: 0.272}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -300,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
       propertyPath: m_TagString
-      value: Enemies
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 400070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -356,6 +356,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 886137943}
+    - targetCorrespondingSourceObject: {fileID: 100070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 886137947}
   m_SourcePrefab: {fileID: 100100000, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
 --- !u!1 &886137942 stripped
 GameObject:
@@ -391,7 +394,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886137942}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 40
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -406,10 +409,23 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &886137947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886137942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1706852ac5b77247a5ebc47278dfb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!1 &913803184
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +840,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -1728013695380148634, guid: cfba2e1168221514a8fd7b15c7fd966e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1350238114}
+    - targetCorrespondingSourceObject: {fileID: -1728013695380148634, guid: cfba2e1168221514a8fd7b15c7fd966e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350238119}
   m_SourcePrefab: {fileID: -3956505258223990651, guid: cfba2e1168221514a8fd7b15c7fd966e, type: 3}
 --- !u!1 &1350238099 stripped
 GameObject:
@@ -917,6 +936,20 @@ MonoBehaviour:
   fireballPrefab: {fileID: 8424143868804141331, guid: 2bbfa6d8e08c3894aa9b50fda7014ffe, type: 3}
   firePoint: {fileID: 667095700}
   fireballSpeed: 10
+--- !u!114 &1350238119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350238099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6607a29f50b8284184c5f6cee1e2164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactEffect: {fileID: 0}
+  damage: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
