@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health = 50; // เลือดของศัตรู
+    public int health = 100; // พลังชีวิตของศัตรู
 
+    // ฟังก์ชันที่รับดาเมจจากกระสุน
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        Debug.Log(gameObject.name + " ได้รับความเสียหาย: " + damage);
-
+        health -= damage; // ลดพลังชีวิตของศัตรู
         if (health <= 0)
         {
-            Die();
+            Die(); // ถ้าพลังชีวิตหมดให้ทำการตาย
         }
     }
 
+    // ฟังก์ชันที่เรียกเมื่อศัตรูตาย
     void Die()
     {
-        Debug.Log(gameObject.name + " ตายแล้ว!");
-        Destroy(gameObject); // ทำลายศัตรู
+        // สามารถเพิ่มฟังก์ชันการตาย เช่น เล่นเสียง, แสดงเอฟเฟกต์, ลบศัตรู
+        Destroy(gameObject); // ลบศัตรูออกจากฉาก
     }
 }

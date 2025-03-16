@@ -7,16 +7,23 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy")) // ถ้ากระสุนชนศัตรู
+        // ตรวจสอบว่าเมื่อกระสุนชนกับวัตถุที่มี Tag "Enemy"
+        if (other.CompareTag("Enemy"))
         {
+            // ค้นหาคอมโพเนนต์ EnemyHealth ในศัตรู
             EnemyHealth enemy = other.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage); // ทำดาเมจศัตรู
+                enemy.TakeDamage(damage); // ส่งดาเมจไปให้ศัตรู
             }
 
-            // สร้างเอฟเฟกต์ระเบิดแล้วทำลายกระสุน
-            Instantiate(impactEffect, transform.position, Quaternion.identity);
+            // สร้างเอฟเฟกต์ระเบิด
+            GameObject effect = Instantiate(impactEffect, transform.position, Quaternion.identity);
+
+            // ทำลายเอฟเฟกต์หลังจาก 3 วินาที
+            Destroy(effect, 3f);
+
+            // ลบกระสุน
             Destroy(gameObject);
         }
     }
