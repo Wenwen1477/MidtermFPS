@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
     private bool isGrounded;
+    private bool canJump = true; // ตัวแปรที่ใช้ในการเช็คว่าตัวละครสามารถกระโดดได้
 
     void Update()
     {
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f; // ป้องกันตัวละครลอย
+            canJump = true; // ตัวละครสามารถกระโดดได้เมื่อแตะพื้น
         }
 
         // รับค่าการเคลื่อนที่จากปุ่มกด
@@ -30,13 +32,18 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
         // กด Space เพื่อกระโดด
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && canJump)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // คำนวณความเร็วกระโดด
+            canJump = false; // ป้องกันการกระโดดซ้ำจนกว่าจะลงพื้น
         }
 
         // ใช้ Gravity
         velocity.y += gravity * Time.deltaTime;
+
+        // เคลื่อนที่ด้วย CharacterController
         controller.Move(velocity * Time.deltaTime);
     }
 }
+
+
