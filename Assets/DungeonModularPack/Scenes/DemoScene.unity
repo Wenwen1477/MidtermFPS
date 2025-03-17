@@ -1851,6 +1851,7 @@ GameObject:
   - component: {fileID: 406481321}
   - component: {fileID: 406481325}
   - component: {fileID: 406481326}
+  - component: {fileID: 406481327}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2017,13 +2018,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406481320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7a97de06cb260d4c87c8224c0459be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 781345592}
   offset: {x: 0, y: 1.5, z: -5}
+--- !u!114 &406481327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406481320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18330faccde1f374c8c2285165341698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 781345592}
+  mouseSensitivity: 2
+  verticalLookLimit: 80
 --- !u!1001 &419844282
 PrefabInstance:
   m_ObjectHideFlags: 0
