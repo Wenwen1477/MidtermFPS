@@ -4851,7 +4851,7 @@ GameObject:
   - component: {fileID: 8314621934699816146}
   m_Layer: 0
   m_Name: FireProjectile
-  m_TagString: Player
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9740,7 +9740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6607a29f50b8284184c5f6cee1e2164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactEffect: {fileID: 0}
+  impactEffect: {fileID: 8424143868804141331}
   damage: 10
 --- !u!114 &8314621934699816146
 MonoBehaviour:
