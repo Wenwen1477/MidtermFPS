@@ -2,48 +2,73 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float moveSpeed = 5f;
+    public float turnSpeed = 10f;
+    public float jumpForce = 5f;
     public CharacterController controller;
-    public float speed = 5f; // ความเร็วในการเดิน
-    public float jumpHeight = 2f; // ความสูงของการกระโดด
-    public float gravity = -9.81f; // ค่าแรงโน้มถ่วง
-    public float groundCheckDistance = 0.3f; // ระยะตรวจจับพื้น
-    public LayerMask groundMask; // Mask สำหรับพื้น
 
-    private Vector3 velocity;
+    private Vector3 playerVelocity;
     private bool isGrounded;
-    private bool canJump = true; // ตัวแปรที่ใช้ในการเช็คว่าตัวละครสามารถกระโดดได้
+
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
 
     void Update()
     {
-        // เช็คว่าตัวละครแตะพื้นหรือไม่
-        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
+        MovePlayer();
+        CheckGround(); // ป้องกันตัวละครจมลงดิน
+    }
 
-        if (isGrounded && velocity.y < 0)
+    void MovePlayer()
+    {
+        isGrounded = controller.isGrounded;
+
+        // ป้องกันตัวละครทะลุพื้น
+        if (isGrounded && playerVelocity.y < 0)
         {
-            velocity.y = -2f; // ป้องกันตัวละครลอย
-            canJump = true; // ตัวละครสามารถกระโดดได้เมื่อแตะพื้น
+            playerVelocity.y = -2f;
         }
 
         // รับค่าการเคลื่อนที่จากปุ่มกด
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        controller.Move(move * speed * Time.deltaTime);
+        Vector3 move = transform.forward * vertical + transform.right * horizontal;
+        controller.Move(move * moveSpeed * Time.deltaTime);
 
-        // กด Space เพื่อกระโดด
-        if (Input.GetButtonDown("Jump") && isGrounded && canJump)
+        // กระโดด
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // คำนวณความเร็วกระโดด
-            canJump = false; // ป้องกันการกระโดดซ้ำจนกว่าจะลงพื้น
+            playerVelocity.y = Mathf.Sqrt(jumpForce * -2f * Physics.gravity.y);
         }
 
         // ใช้ Gravity
-        velocity.y += gravity * Time.deltaTime;
+        playerVelocity.y += Physics.gravity.y * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
 
-        // เคลื่อนที่ด้วย CharacterController
-        controller.Move(velocity * Time.deltaTime);
+    void CheckGround()
+    {
+        // ยิง Raycast ลงไปเช็กพื้น
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+        {
+            if (hit.collider != null)
+            {
+                Vector3 newPosition = transform.position;
+                newPosition.y = hit.point.y + 0.1f; // ดันตัวละครให้อยู่เหนือพื้น
+                transform.position = newPosition;
+            }
+        }
+
+        // ถ้าตัวละครต่ำกว่าระดับพื้น (กันตกฉาก)
+        if (transform.position.y < -5)
+        {
+            Vector3 newPosition = transform.position;
+            newPosition.y = 1f; // ย้ายตัวละครขึ้นมาใหม่
+            transform.position = newPosition;
+        }
     }
 }
-
-
