@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health = 100; // พลังชีวิตของศัตรู
+    public int health = 1300; // พลังชีวิตของศัตรู
 
     // ฟังก์ชันที่รับดาเมจจากกระสุน
     public void TakeDamage(int damage)
