@@ -7,6 +7,7 @@ TagManager:
   - Enemies
   - Enemy
   - Projectile
+  - Stairs
   layers:
   - Default
   - TransparentFX
