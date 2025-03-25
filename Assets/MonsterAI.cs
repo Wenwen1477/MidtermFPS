@@ -9,14 +9,36 @@ public class MonsterAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("ไม่พบ GameObject ที่มี Tag 'Player'");
+        }
+
+        // ตรวจสอบว่า agent อยู่บน NavMesh หรือไม่
+        if (agent == null || !agent.isOnNavMesh)
+        {
+            Debug.LogError("NavMeshAgent ไม่ได้อยู่บน NavMesh!");
+        }
     }
 
     void Update()
     {
-        if (player != null)
+        if (agent != null && agent.isOnNavMesh && player != null)
         {
-            agent.SetDestination(player.position);
+            if (agent.isActiveAndEnabled) // ป้องกันข้อผิดพลาดถ้า agent ถูกปิด
+            {
+                agent.SetDestination(player.position);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("MonsterAI ไม่อยู่บน NavMesh หรือไม่มี Player!");
         }
     }
 }
