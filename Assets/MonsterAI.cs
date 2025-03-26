@@ -26,6 +26,22 @@ public class MonsterAI : MonoBehaviour
         if (player != null && agent.isOnNavMesh)
         {
             agent.SetDestination(player.position);
+
+            void Start()
+            {
+                agent = GetComponent<NavMeshAgent>();
+
+                if (agent.isOnNavMesh)
+                {
+                    player = GameObject.FindGameObjectWithTag("Player").transform;
+                    Debug.Log("NavMeshAgent พร้อมใช้งาน!");
+                }
+                else
+                {
+                    Debug.LogError("NavMeshAgent ไม่ได้อยู่บน NavMesh! ตรวจสอบว่า Bake NavMesh แล้วหรือยัง?");
+                }
+            }
+
         }
     }
 }

@@ -151,7 +151,7 @@ NavMeshAgent:
   m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6477228265923733452
@@ -167,4 +167,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5159078012444724336, guid: cfba2e1168221514a8fd7b15c7fd966e, type: 3}
-  stoppingDistance: 2
