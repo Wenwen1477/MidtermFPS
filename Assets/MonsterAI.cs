@@ -3,45 +3,30 @@ using UnityEngine.AI;
 
 public class MonsterAI : MonoBehaviour
 {
-    public Transform player;
-    private NavMeshAgent agent;
+    private NavMeshAgent agent;  // ตัวควบคุมการเดิน
+    private Transform player;    // เป้าหมาย (VRM Player)
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();  // ดึง NavMeshAgent จาก GameObject
 
-        // ตรวจสอบว่า NavMeshAgent อยู่บน NavMesh หรือไม่
-        if (agent.isOnNavMesh)
+        // หา GameObject ที่มี Tag เป็น "Player" (VRM Player)
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            player = playerObj.transform;
         }
         else
         {
-            Debug.LogError("MonsterAI: NavMeshAgent ไม่ได้อยู่บน NavMesh!");
+            Debug.LogError("ไม่พบ Player ที่มี Tag = 'Player'! ตรวจสอบใน Inspector ด้วย!");
         }
     }
 
     void Update()
     {
-        if (player != null && agent.isOnNavMesh)
+        if (player != null && agent != null && agent.isOnNavMesh)  // เช็คว่ามี Player และ Agent อยู่บน NavMesh
         {
-            agent.SetDestination(player.position);
-
-            void Start()
-            {
-                agent = GetComponent<NavMeshAgent>();
-
-                if (agent.isOnNavMesh)
-                {
-                    player = GameObject.FindGameObjectWithTag("Player").transform;
-                    Debug.Log("NavMeshAgent พร้อมใช้งาน!");
-                }
-                else
-                {
-                    Debug.LogError("NavMeshAgent ไม่ได้อยู่บน NavMesh! ตรวจสอบว่า Bake NavMesh แล้วหรือยัง?");
-                }
-            }
-
+            agent.SetDestination(player.position); // ให้มอนสเตอร์เดินไปหาผู้เล่น
         }
     }
 }
